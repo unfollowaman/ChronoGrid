@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CHRONO.GRID — Interval Checklist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-theme="green">
+
+  <!-- Scanline overlay -->
+  <div class="scanlines"></div>
+  <!-- Particle canvas -->
+  <canvas id="particleCanvas"></canvas>
+
+  <div class="app-wrapper">
+
+    <!-- Header -->
+    <header class="site-header">
+      <div class="logo-block">
+        <span class="logo-prefix">◈</span>
+        <h1 class="logo-text">CHRONO<span class="logo-accent">.GRID</span></h1>
+        <span class="logo-suffix">◈</span>
+      </div>
+      <p class="tagline">INTERVAL CHECKLIST SYSTEM // v2.4.1</p>
+
+      <!-- Theme Switcher -->
+      <div class="theme-switcher">
+        <span class="theme-label">PALETTE</span>
+        <button class="theme-btn active" data-theme="green" title="Neon Green">●</button>
+        <button class="theme-btn" data-theme="blue" title="Neon Blue">●</button>
+        <button class="theme-btn" data-theme="purple" title="Neon Purple">●</button>
+      </div>
+    </header>
+
+    <!-- Input Panel -->
+    <section class="panel input-panel" id="inputPanel">
+      <div class="panel-header">
+        <span class="panel-tag">01</span>
+        <h2 class="panel-title">MISSION PARAMETERS</h2>
+        <div class="panel-line"></div>
+      </div>
+
+      <div class="input-grid">
+        <div class="input-group">
+          <label class="input-label" for="startDate">
+            <span class="label-icon">◷</span> START DATE
+          </label>
+          <input type="date" id="startDate" class="sci-input" />
+        </div>
+
+        <div class="input-group">
+          <label class="input-label" for="intervalDays">
+            <span class="label-icon">⌥</span> INTERVAL (DAYS)
+          </label>
+          <input type="number" id="intervalDays" class="sci-input" min="1" value="7" placeholder="7" />
+        </div>
+
+        <div class="input-group">
+          <label class="input-label" for="totalIntervals">
+            <span class="label-icon">⊞</span> TOTAL CHECKPOINTS
+          </label>
+          <input type="number" id="totalIntervals" class="sci-input" min="1" value="10" placeholder="10" />
+        </div>
+      </div>
+
+      <div class="button-row">
+        <button class="sci-btn primary" id="generateBtn">
+          <span class="btn-icon">⚡</span>
+          INITIALIZE GRID
+        </button>
+        <button class="sci-btn secondary" id="resetBtn">
+          <span class="btn-icon">↺</span>
+          RESET
+        </button>
+      </div>
+    </section>
+
+    <!-- Progress Panel -->
+    <section class="panel progress-panel" id="progressPanel" style="display:none">
+      <div class="panel-header">
+        <span class="panel-tag">02</span>
+        <h2 class="panel-title">MISSION STATUS</h2>
+        <div class="panel-line"></div>
+      </div>
+
+      <div class="progress-stats">
+        <div class="stat-block">
+          <span class="stat-num" id="completedCount">0</span>
+          <span class="stat-label">COMPLETED</span>
+        </div>
+        <div class="stat-divider">/</div>
+        <div class="stat-block">
+          <span class="stat-num" id="totalCount">0</span>
+          <span class="stat-label">TOTAL</span>
+        </div>
+        <div class="stat-percent-block">
+          <span class="stat-percent" id="percentDisplay">0%</span>
+        </div>
+      </div>
+
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" id="progressFill"></div>
+        <div class="progress-bar-glow" id="progressGlow"></div>
+      </div>
+
+      <div class="progress-label-row">
+        <span class="progress-label-text" id="progressStatus">AWAITING MISSION LAUNCH</span>
+        <button class="sci-btn export-btn" id="exportBtn">
+          <span class="btn-icon">⬇</span> EXPORT
+        </button>
+      </div>
+
+      <!-- Export submenu -->
+      <div class="export-menu" id="exportMenu" style="display:none">
+        <button class="export-option" id="exportPDF">
+          <span>◧</span> Export as PDF
+        </button>
+        <button class="export-option" id="exportImage">
+          <span>◨</span> Export as Image
+        </button>
+      </div>
+    </section>
+
+    <!-- Checklist Panel -->
+    <section class="panel checklist-panel" id="checklistPanel" style="display:none">
+      <div class="panel-header">
+        <span class="panel-tag">03</span>
+        <h2 class="panel-title">CHECKPOINT LOG</h2>
+        <div class="panel-line"></div>
+      </div>
+
+      <div class="checklist-container" id="checklistContainer">
+        <!-- Items injected by JS -->
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <span>◈ CHRONO.GRID SYSTEM — AUTOSAVE ACTIVE ◈</span>
+    </footer>
+  </div>
+
+  <!-- jsPDF + html-to-image via CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
